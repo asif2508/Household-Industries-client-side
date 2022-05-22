@@ -3,7 +3,7 @@ import React from 'react';
 import { faScrewdriverWrench } from '@fortawesome/free-solid-svg-icons';
 const Footer = () => {
     return (
-        <footer class="footer p-10 bg-base-200 text-base-content">
+        <footer class="footer p-10 bg-primary text-base-content">
             <div>
                 <FontAwesomeIcon className='text-3xl' icon={faScrewdriverWrench }></FontAwesomeIcon>
                 <p>Household Industrial<br />Providing reliable products since 1992</p>
