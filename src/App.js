@@ -1,11 +1,25 @@
 import './App.css';
 import Header from './Pages/Shared/Header/Header';
-
+import { Routes, Route, Link } from "react-router-dom";
+import Home from './Pages/HomePage/Home/Home';
+import Blogs from './Pages/Blogs/Blogs';
+import Portfolio from './Pages/Portfolio/Portfolio';
+import Login from './Pages/Authentication/Login/Login';
+import Register from './Pages/Authentication/Register/Register';
+import NotFound from './Pages/Shared/NotFound/NotFound';
 function App() {
   return (
     <div className="App">
       <Header></Header>
-      <h1 className='text-5xl text-primary'>hello world</h1>
+      <Routes>
+        <Route path='/' element={<Home></Home>}></Route>
+        <Route path='/blogs' element={<Blogs></Blogs>}></Route>
+        <Route path='/portfoilo' element={<Portfolio></Portfolio>}></Route>
+        <Route path='/login' element={<Login></Login>}></Route>
+        <Route path='/register' element={<Register></Register>}></Route>
+        {/* <Route path='/Dashboard' element={<Home></Home>}></Route> */}
+        <Route path='*' element={<NotFound></NotFound>}></Route>
+      </Routes>
     </div>
   );
 }
