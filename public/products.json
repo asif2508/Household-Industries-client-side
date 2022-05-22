@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Hammer",
+        "img": "https://images.unsplash.com/photo-1588619461335-b81119fee1b5?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=60&raw_url=true&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8aGFtbWVyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500",
+        "desc" : "Heavier hammers are power tools, among the largest being the pile driver. Trip-hammers depend on gravity for their impulse, but steam hammers often employ, in addition to gravity etc.",
+        "minimum": 100,
+        "available": 3000,
+        "price": 10
+    },
+    {
+        "name": "Drill machine",
+        "img": "https://images.unsplash.com/photo-1616321507403-9db926c914fd?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=60&raw_url=true&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fGRyaWxsJTIwbWFjaGluZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500",
+        "desc" : "Best drill machine in Bangladesh. We have everything from cordless & corded drill machine to Demolition drills & rotary hammer drills. Best Price in BD!",
+        "minimum": 50,
+        "available": 2000,
+        "price": 100
+    },
+    {
+        "name": "screwdriver",
+        "img": "https://images.unsplash.com/photo-1524224313114-ebd9c49dde82?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=60&raw_url=true&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c2NyZXdkcml2ZXJ8ZW58MHx8MHx8&auto=format&fit=crop&w=500",
+        "desc" : "Online shopping for Screwdriver Sets from a great selection at Tools & Home Improvement Store.",
+        "minimum": 250,
+        "available": 2000,
+        "price": 5 
+    },
+    {
+        "name": "Wrench",
+        "img": "https://images.unsplash.com/photo-1503789188050-804ee34b3d32?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=60&raw_url=true&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8d3JlbmNofGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500",
+        "desc" : "Wrenches, also called spanners are a hand-operated tool used for tightening bolts and nuts. This tool functions as a lever with notches at the mouth.",
+        "minimum": 50,
+        "available": 500,
+        "price": 10 
+    }
+]
