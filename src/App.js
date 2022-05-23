@@ -9,6 +9,7 @@ import Register from './Pages/Authentication/Register/Register';
 import NotFound from './Pages/Shared/NotFound/NotFound';
 import Footer from './Pages/Shared/Footer/Footer';
 import Dashboard from './Pages/Dashboard/Dashboard';
+import RequiredAuth from './Pages/Authentication/RequiredAuth/RequiredAuth';
 function App() {
   return (
     <div className="App">
@@ -19,7 +20,13 @@ function App() {
         <Route path='/portfolio' element={<Portfolio></Portfolio>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/register' element={<Register></Register>}></Route>
-        <Route path='/Dashboard' element={<Dashboard></Dashboard>}></Route>
+        <Route path='/Dashboard' element={
+          <RequiredAuth>
+            <Dashboard></Dashboard>
+          </RequiredAuth>
+        }>
+          
+        </Route>
         <Route path='*' element={<NotFound></NotFound>}></Route>
       </Routes>
       <Footer></Footer>

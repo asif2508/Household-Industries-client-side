@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import { useSignInWithGoogle, useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import Loading from '../../Shared/Loading/Loading';
@@ -15,17 +15,20 @@ const Register = () => {
         error,
     ] = useCreateUserWithEmailAndPassword(auth);
     const [updateProfile, updating] = useUpdateProfile(auth);
+    const navigate = useNavigate()
     const { register, formState: { errors }, handleSubmit } = useForm();
     if(loading || updating || gloading){
         return <Loading></Loading>
     }
+    if(user || guser){
+        navigate('/')
+    }
     const onSubmit = async data => {
         const name = data.name;
-        const email = data.name;
-        const password = data.name;
+        const email = data.email;
+        const password = data.password;
         await createUserWithEmailAndPassword(email, password);
         await updateProfile({ displayName: name });
-
     };
     const handleSignInGoogle = () => {
         signInWithGoogle();
@@ -105,7 +108,13 @@ const Register = () => {
                             </label>
 
                         </div>
-                        <input class="btn btn-secondary w-full" type="submit" value='Login' />
+                        {error && <label className="label text-error">
+                                {error?.message}
+                            </label>}
+                            {gerror && <label className="label text-error">
+                                {gerror?.message}
+                            </label>}
+                        <input class="btn btn-secondary w-full" type="submit" value='Register' />
                     </form>
                     <div className='flex items-center'>
                         <label class="label">

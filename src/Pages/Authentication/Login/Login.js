@@ -1,14 +1,35 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
-import {useSignInWithGoogle} from 'react-firebase-hooks/auth';
+import { useSignInWithGoogle, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import Loading from '../../Shared/Loading/Loading';
 const Login = () => {
-    const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
+    const [signInWithGoogle, guser, gloading, gerror] = useSignInWithGoogle(auth);
+    const [
+        signInWithEmailAndPassword,
+        user,
+        loading,
+        error,
+    ] = useSignInWithEmailAndPassword(auth);
+    const navigate = useNavigate();
+    let location = useLocation();
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const onSubmit = data => console.log(data);
+    let from = location.state?.from?.pathname || "/";
+    if(user || guser){
+        navigate(from, { replace: true });
+    }
+    if(loading || gloading){
+        return <Loading></Loading>
+    }
+    
+    const onSubmit = async data => {
+        const email = data.email;
+        const password = data.password;
+        await signInWithEmailAndPassword(email, password)
+    };
 
-    const handleSignInGoogle =()=>{
+    const handleSignInGoogle = () => {
         signInWithGoogle();
     }
     return (
@@ -68,6 +89,12 @@ const Login = () => {
                                 <a href="#" class="label-text-alt link link-hover link-secondary">Forgot password?</a>
                             </label>
                         </div>
+                        {error && <label className="label text-error">
+                                {error?.message}
+                            </label>}
+                            {gerror && <label className="label text-error">
+                                {gerror?.message}
+                            </label>}
                         <input class="btn btn-secondary w-full" type="submit" value='Login' />
                     </form>
                     <div className='flex items-center'>
