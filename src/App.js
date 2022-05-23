@@ -10,6 +10,9 @@ import NotFound from './Pages/Shared/NotFound/NotFound';
 import Footer from './Pages/Shared/Footer/Footer';
 import Dashboard from './Pages/Dashboard/Dashboard';
 import RequiredAuth from './Pages/Authentication/RequiredAuth/RequiredAuth';
+import AddReview from './Pages/Dashboard/AddReview';
+import MyOrders from './Pages/Dashboard/MyOrders';
+import MyProfile from './Pages/Dashboard/MyProfile';
 function App() {
   return (
     <div className="App">
@@ -20,12 +23,15 @@ function App() {
         <Route path='/portfolio' element={<Portfolio></Portfolio>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/register' element={<Register></Register>}></Route>
-        <Route path='/Dashboard' element={
+        <Route path='/dashboard' element={
           <RequiredAuth>
             <Dashboard></Dashboard>
           </RequiredAuth>
         }>
-          
+          <Route index element={<MyProfile></MyProfile>}></Route>
+          <Route path='/dashboard/myorders' element={<MyOrders></MyOrders>}></Route>
+          <Route path='/dashboard/addreview' element={<AddReview></AddReview>}></Route>
+
         </Route>
         <Route path='*' element={<NotFound></NotFound>}></Route>
       </Routes>

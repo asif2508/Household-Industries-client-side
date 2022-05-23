@@ -3,7 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 import { signOut } from 'firebase/auth';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 const Header = () => {
     const [user] = useAuthState(auth);
     const navigate = useNavigate()
@@ -36,6 +37,7 @@ const Header = () => {
                     </ul>
                 </div>
                 <a className="btn btn-ghost normal-case text-xl">Household Industrial</a>
+                <label for="my-drawer-2" class="btn btn-secondary drawer-button lg:hidden"><FontAwesomeIcon icon={faBars}></FontAwesomeIcon></label>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-16">
