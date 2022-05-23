@@ -1,9 +1,16 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
+import auth from '../../../firebase.init';
+import {useSignInWithGoogle} from 'react-firebase-hooks/auth';
 const Login = () => {
+    const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
     const { register, formState: { errors }, handleSubmit } = useForm();
     const onSubmit = data => console.log(data);
+
+    const handleSignInGoogle =()=>{
+        signInWithGoogle();
+    }
     return (
         <div className='flex justify-center mt-12 mb-16'>
             <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-primary">
@@ -72,7 +79,7 @@ const Login = () => {
                         </label>
                     </div>
                     <div class="divider">OR</div>
-                    <button class="btn btn-secondary">sign in with Google</button>
+                    <button onClick={handleSignInGoogle} class="btn btn-secondary">sign in with Google</button>
                 </div>
             </div>
 

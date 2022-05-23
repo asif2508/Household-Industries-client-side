@@ -1,11 +1,28 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../../firebase.init';
+import { signOut } from 'firebase/auth';
+
 const Header = () => {
+    const [user] = useAuthState(auth);
+    const navigate = useNavigate()
+    const handleSignOut = () =>{
+        signOut(auth);
+        navigate('/');
+    }
     const navigations = <>
         <li><Link to='/' >Home</Link></li>
         <li><Link to='/portfolio' >My Portfolio</Link></li>
         <li><Link to='/blogs' >Blogs</Link></li>
-        <li><Link to='/login' >Login</Link></li>
+        {user ? 
+        <>
+        <li><Link to='/dashboard' >Dashboard</Link></li>
+        <li><button onClick={handleSignOut} class="btn btn-secondary">Sign out</button></li>
+        
+        </>
+        :
+        <li><Link to='/login' >Login</Link></li>}
     </>
     return (
         <div className="navbar bg-primary">

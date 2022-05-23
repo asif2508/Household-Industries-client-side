@@ -1,17 +1,42 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import auth from '../../../firebase.init';
+import { useSignInWithGoogle, useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
+import Loading from '../../Shared/Loading/Loading';
+
 
 const Register = () => {
+    const [signInWithGoogle, guser, gloading, gerror] = useSignInWithGoogle(auth);
+    const [
+        createUserWithEmailAndPassword,
+        user,
+        loading,
+        error,
+    ] = useCreateUserWithEmailAndPassword(auth);
+    const [updateProfile, updating] = useUpdateProfile(auth);
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const onSubmit = data => console.log(data);
+    if(loading || updating || gloading){
+        return <Loading></Loading>
+    }
+    const onSubmit = async data => {
+        const name = data.name;
+        const email = data.name;
+        const password = data.name;
+        await createUserWithEmailAndPassword(email, password);
+        await updateProfile({ displayName: name });
+
+    };
+    const handleSignInGoogle = () => {
+        signInWithGoogle();
+    }
     return (
         <div className='flex justify-center mt-12 mb-16'>
             <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-primary">
                 <h1 className='text-3xl mt-4 mb-0'>Create a New Acoount</h1>
                 <div class="card-body">
                     <form onSubmit={handleSubmit(onSubmit)}>
-                    <div class="form-control">
+                        <div class="form-control">
                             <label class="label">
                                 <span class="label-text">Name</span>
                             </label>
@@ -78,7 +103,7 @@ const Register = () => {
                                 {errors.password?.type === 'required' && <span className="label-text-alt text-red-500">{errors.password?.message}</span>}
                                 {errors.password?.type === 'pattern' && <span className="label-text-alt text-red-500">{errors.password?.message}</span>}
                             </label>
-                            
+
                         </div>
                         <input class="btn btn-secondary w-full" type="submit" value='Login' />
                     </form>
@@ -91,7 +116,7 @@ const Register = () => {
                         </label>
                     </div>
                     <div class="divider">OR</div>
-                    <button class="btn btn-secondary">sign in with Google</button>
+                    <button onClick={handleSignInGoogle} class="btn btn-secondary">sign in with Google</button>
                 </div>
             </div>
 
