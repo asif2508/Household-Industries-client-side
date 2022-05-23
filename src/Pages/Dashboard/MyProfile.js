@@ -28,7 +28,7 @@ const MyProfile = () => {
                             <input type="text" placeholder={user.phoneNumber ? user.phoneNumber : "add a phone number"} class="input input-bordered w-full max-w-xs" />
                         </div>
                         <div class="form-control w-full max-w-xs mb-5">
-                            <input class="btn btn-secondary" type="submit" placeholder="Update" />
+                            <input class="btn btn-secondary" type="submit" value="Update" />
                         </div>
 
                     </form>
