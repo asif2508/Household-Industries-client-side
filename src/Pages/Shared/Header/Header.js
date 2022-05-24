@@ -11,6 +11,7 @@ const Header = () => {
     const handleSignOut = () =>{
         signOut(auth);
         navigate('/');
+        localStorage.removeItem('accessToken');
     }
     const navigations = <>
         <li><Link to='/' >Home</Link></li>
