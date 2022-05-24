@@ -18,13 +18,15 @@ const Login = () => {
     const [token] = useToken(user || guser)
     const { register, formState: { errors }, handleSubmit } = useForm();
     let from = location.state?.from?.pathname || "/";
-    if(token){
+
+    if (token) {
         navigate(from, { replace: true });
     }
-    if(loading || gloading){
+
+    if (loading || gloading) {
         return <Loading></Loading>
     }
-    
+
     const onSubmit = async data => {
         const email = data.email;
         const password = data.password;
@@ -92,11 +94,11 @@ const Login = () => {
                             </label>
                         </div>
                         {error && <label className="label text-error">
-                                {error?.message}
-                            </label>}
-                            {gerror && <label className="label text-error">
-                                {gerror?.message}
-                            </label>}
+                            {error?.message}
+                        </label>}
+                        {gerror && <label className="label text-error">
+                            {gerror?.message}
+                        </label>}
                         <input class="btn btn-secondary w-full" type="submit" value='Login' />
                     </form>
                     <div className='flex items-center'>

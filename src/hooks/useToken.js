@@ -1,25 +1,27 @@
 import {useEffect, useState} from 'react';
 const useToken = user =>{
     const [token, setToken] = useState('')
-    const email = user?.user?.email;
-    console.log(email);
-    console.log(token);
     useEffect(()=>{
-        fetch(`http://localhost:5000/users/${email}`,{
-            method:'PUT',
-            headers : {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify({email: email})
-        })
-        .then(res => res.json())
-        .then(data => {
-            const accessToken = data.token;
-            console.log(data);
-            localStorage.setItem('accessToken', accessToken);
-            setToken(accessToken);
-        })
-    },[])
+        const postReq = async () => {
+            const email = user?.user?.email;
+            if(email){
+                await fetch(`http://localhost:5000/users/${email}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    setToken(data.token);
+                    localStorage.setItem("accessToken", data.token);
+                })
+            }
+        }
+        postReq();
+    }, [user])
     return [token];
 }
 export default useToken;

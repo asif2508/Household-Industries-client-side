@@ -23,8 +23,7 @@ const Register = () => {
         return <Loading></Loading>
     }
     if(token){
-        navigate('/')
-        console.log(user);
+        navigate('/');
     }
     const onSubmit = async data => {
         const name = data.name;

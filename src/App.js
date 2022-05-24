@@ -13,6 +13,10 @@ import RequiredAuth from './Pages/Authentication/RequiredAuth/RequiredAuth';
 import AddReview from './Pages/Dashboard/AddReview';
 import MyOrders from './Pages/Dashboard/MyOrders';
 import MyProfile from './Pages/Dashboard/MyProfile';
+import AddProduct from './Pages/Dashboard/AddProduct';
+import ManageProduct from './Pages/Dashboard/ManageProduct';
+import ManageOrders from './Pages/Dashboard/ManageOrders';
+import MakeAdmin from './Pages/Dashboard/MakeAdmin';
 function App() {
   return (
     <div className="App">
@@ -31,6 +35,10 @@ function App() {
           <Route index element={<MyProfile></MyProfile>}></Route>
           <Route path='/dashboard/myorders' element={<MyOrders></MyOrders>}></Route>
           <Route path='/dashboard/addreview' element={<AddReview></AddReview>}></Route>
+          <Route path='/dashboard/addproduct' element={<AddProduct></AddProduct>}></Route>
+          <Route path='/dashboard/manageproducts' element={<ManageProduct></ManageProduct>}></Route>
+          <Route path='/dashboard/manageorders' element={<ManageOrders></ManageOrders>}></Route>
+          <Route path='/dashboard/makeadmin' element={<MakeAdmin></MakeAdmin>}></Route>
 
         </Route>
         <Route path='*' element={<NotFound></NotFound>}></Route>
