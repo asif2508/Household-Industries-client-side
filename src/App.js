@@ -17,6 +17,9 @@ import AddProduct from './Pages/Dashboard/AddProduct';
 import ManageProduct from './Pages/Dashboard/ManageProduct';
 import ManageOrders from './Pages/Dashboard/ManageOrders';
 import MakeAdmin from './Pages/Dashboard/MakeAdmin';
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import RequiredAdmin from './Pages/Authentication/RequiredAdmin/RequiredAdmin';
 function App() {
   return (
     <div className="App">
@@ -35,15 +38,17 @@ function App() {
           <Route index element={<MyProfile></MyProfile>}></Route>
           <Route path='/dashboard/myorders' element={<MyOrders></MyOrders>}></Route>
           <Route path='/dashboard/addreview' element={<AddReview></AddReview>}></Route>
-          <Route path='/dashboard/addproduct' element={<AddProduct></AddProduct>}></Route>
-          <Route path='/dashboard/manageproducts' element={<ManageProduct></ManageProduct>}></Route>
-          <Route path='/dashboard/manageorders' element={<ManageOrders></ManageOrders>}></Route>
-          <Route path='/dashboard/makeadmin' element={<MakeAdmin></MakeAdmin>}></Route>
+          <Route path='/dashboard/addproduct' element={<RequiredAdmin><AddProduct></AddProduct></RequiredAdmin>}></Route>
+          <Route path='/dashboard/manageproducts' element={<RequiredAdmin><ManageProduct></ManageProduct></RequiredAdmin>}></Route>
+          <Route path='/dashboard/manageorders' element={<RequiredAdmin><ManageOrders></ManageOrders></RequiredAdmin>}></Route>
+          <Route path='/dashboard/makeadmin' element={<RequiredAdmin><MakeAdmin></MakeAdmin></RequiredAdmin>}></Route>
+          
 
         </Route>
         <Route path='*' element={<NotFound></NotFound>}></Route>
       </Routes>
       <Footer></Footer>
+      <ToastContainer></ToastContainer>
     </div>
   );
 }

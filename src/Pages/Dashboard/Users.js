@@ -1,4 +1,5 @@
 import React from 'react';
+import { toast } from 'react-toastify';
 
 const Users = ({index,user}) => {
     const {email, role} = user;
@@ -10,7 +11,13 @@ const Users = ({index,user}) => {
             }
         })
         .then(res => res.json())
-        .then(data => console.log(data))
+        .then(data => {
+            if(data.modifiedCount > 0){
+                toast.info('New Admin added');
+            }else{
+                toast.error('You are not authorized to do.')
+            }
+        })
     }
     return (
         <tr>
