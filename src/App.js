@@ -20,6 +20,7 @@ import MakeAdmin from './Pages/Dashboard/MakeAdmin';
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import RequiredAdmin from './Pages/Authentication/RequiredAdmin/RequiredAdmin';
+import Purchase from './Pages/Purchase/Purchase';
 function App() {
   return (
     <div className="App">
@@ -42,9 +43,8 @@ function App() {
           <Route path='/dashboard/manageproducts' element={<RequiredAdmin><ManageProduct></ManageProduct></RequiredAdmin>}></Route>
           <Route path='/dashboard/manageorders' element={<RequiredAdmin><ManageOrders></ManageOrders></RequiredAdmin>}></Route>
           <Route path='/dashboard/makeadmin' element={<RequiredAdmin><MakeAdmin></MakeAdmin></RequiredAdmin>}></Route>
-          
-
         </Route>
+        <Route path='/purchase/:id' element={<RequiredAuth><Purchase></Purchase></RequiredAuth>}></Route>
         <Route path='*' element={<NotFound></NotFound>}></Route>
       </Routes>
       <Footer></Footer>
