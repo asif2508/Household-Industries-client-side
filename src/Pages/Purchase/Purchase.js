@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Loading from 'react-loading';
+import Loading from '../Shared/Loading/Loading';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { loadStripe } from '@stripe/stripe-js';
@@ -12,6 +12,7 @@ import {
 import CheckoutForm from './CheckoutForm';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
+import { toast } from 'react-toastify';
 const stripePromise = loadStripe('pk_test_51L33S2Lc3FrHqLv7SfLbiwAnkW4Clt56SXVvo1HsynyEPzanLTFqLeae6saAfUb9z8ACtnZuXlBeaWbpMk8G1OwH00GVmF7AnE');
 
 const Purchase = () => {
@@ -54,9 +55,11 @@ const Purchase = () => {
         // const transection_Id = event.target.transection_id.value;
         if (quantity < minimum) {
             setQuantityError('Please Increase the quantity to minimum amount')
+            return;
         }
         else if (quantity < minimum) {
             setQuantityError('Insufficient amount!')
+            return;
         }
 
         const data = {
@@ -70,14 +73,27 @@ const Purchase = () => {
         }
         console.log(data);
         fetch(`http://localhost:5000/orders`,{
-            method: "PUT",
+            method: "POST",
             headers:{
                 'content-type': 'application/json'
             },
             body: JSON.stringify(data),
         })
-        .then(res => res.json())
+        .then(res => {
+            if(res.ok){
+                return res.json()
+            }else{
+                return toast("failed to order");
+            }
+        })
         .then(data => console.log(data))
+        toast('Order Placed Successfully');
+        setQuantity(0);
+        event.target.pquantity.value = 0;
+        event.target.transaction_id.value= null;
+        setTotalPrice(0);
+        setQuantityError('');
+        setnewTransactionId(null);
     }
     return (
         <div className='flex justify-center mt-12 mb-16'>
@@ -125,7 +141,7 @@ const Purchase = () => {
                                 <label class="label">
                                     <span class="label-text">Order Quantity</span>
                                 </label>
-                                <input onBlur={handleQuantity} name='quantity' type="number" placeholder={`min ${minimum} to max ${available}`} class="input input-bordered w-full max-w-xs" />
+                                <input onBlur={handleQuantity} name='pquantity' type="number" placeholder={`min ${minimum} to max ${available}`} class="input input-bordered w-full max-w-xs" />
                                 {quantityError && <label class="label">
                                     <span class="label-text">{quantityError}</span>
                                 </label>}
