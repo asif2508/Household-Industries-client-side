@@ -17,7 +17,8 @@ const stripePromise = loadStripe('pk_test_51L33S2Lc3FrHqLv7SfLbiwAnkW4Clt56SXVvo
 const Purchase = () => {
     const { id } = useParams();
     const [user] = useAuthState(auth);
-    const [transactionId, setTransactionId] = useState('');
+    const [newTransactionId, setnewTransactionId] = useState(null);
+    const [quantity, setQuantity] = useState(0);
     const [quantityError, setQuantityError] = useState('');
     const [totalPrice, setTotalPrice] = useState(0);
     const { isLoading, data: purchaseItem } = useQuery('purchaseItem', () => fetch(`http://localhost:5000/products/${id}`, {
@@ -31,21 +32,52 @@ const Purchase = () => {
         return <Loading></Loading>
     }
     const { _id, img, desc, name, price, minimum, available } = purchaseItem;
-    const {displayName, email} = user;
+    const { displayName, email } = user;
 
-    const handleOrderSubmit = event =>{
+    const handleQuantity = event => {
+        const quantity = event.target.value;
+        setQuantity(quantity);
+        console.log(quantity);
+        if (quantity > 0) {
+            setTotalPrice(1);
+            const total_price = parseInt(quantity) * price;
+            setTotalPrice(total_price);
+        }
+    }
+    const handleOrderSubmit = event => {
         event.preventDefault();
         const name = event.target.name.value;
         const email = event.target.email.value;
         const product_id = event.target.product_id.value;
         const product_name = event.target.product_name.value;
-        const quantity = event.target.quantity.value;
-        const total_price = event.target.total_price.value;
-        const transection_Id = event.target.transection_id.value;
-        const data ={
-            name, email, product_id, product_name, quantity, total_price, transection_Id
+        // const quantity = event.target.quantity.value;
+        // const transection_Id = event.target.transection_id.value;
+        if (quantity < minimum) {
+            setQuantityError('Please Increase the quantity to minimum amount')
+        }
+        else if (quantity < minimum) {
+            setQuantityError('Insufficient amount!')
+        }
+
+        const data = {
+            name: name,
+            email: email,
+            product_id: product_id,
+            product_name: product_name,
+            quantity: quantity,
+            totalPrice: totalPrice,
+            newTransactionId: newTransactionId
         }
         console.log(data);
+        fetch(`http://localhost:5000/orders`,{
+            method: "PUT",
+            headers:{
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(data),
+        })
+        .then(res => res.json())
+        .then(data => console.log(data))
     }
     return (
         <div className='flex justify-center mt-12 mb-16'>
@@ -69,57 +101,71 @@ const Purchase = () => {
                                 <label class="label">
                                     <span class="label-text">Name</span>
                                 </label>
-                                <input name='name' disabled='true' type="text" value={displayName} class="input input-bordered w-full max-w-xs" />
+                                <input name='name' disabled={true} type="text" defaultValue={displayName} class="input input-bordered w-full max-w-xs" />
                             </div>
                             <div class="form-control w-full max-w-xs">
                                 <label class="label">
                                     <span class="label-text">Email</span>
                                 </label>
-                                <input name='email' disabled='true' type="text" value={email} class="input input-bordered w-full max-w-xs" />
+                                <input name='email' disabled={true} type="text" defaultValue={email} class="input input-bordered w-full max-w-xs" />
                             </div>
                             <div class="form-control w-full max-w-xs">
                                 <label class="label">
                                     <span class="label-text">Product Id</span>
                                 </label>
-                                <input name='product_id' disabled='true' type="text" value={_id} class="input input-bordered w-full max-w-xs" />
+                                <input name='product_id' disabled={true} type="text" defaultValue={_id} class="input input-bordered w-full max-w-xs" />
                             </div>
                             <div class="form-control w-full max-w-xs">
                                 <label class="label">
                                     <span class="label-text">Product Name</span>
                                 </label>
-                                <input name='product_name' disabled='true' type="text" value={name} class="input input-bordered w-full max-w-xs" />
+                                <input name='product_name' disabled={true} type="text" defaultValue={name} class="input input-bordered w-full max-w-xs" />
                             </div>
                             <div class="form-control w-full max-w-xs">
                                 <label class="label">
                                     <span class="label-text">Order Quantity</span>
                                 </label>
-                                <input name='quantity' type="text" placeholder={`min ${minimum} to max ${available}`} class="input input-bordered w-full max-w-xs" />
+                                <input onBlur={handleQuantity} name='quantity' type="number" placeholder={`min ${minimum} to max ${available}`} class="input input-bordered w-full max-w-xs" />
+                                {quantityError && <label class="label">
+                                    <span class="label-text">{quantityError}</span>
+                                </label>}
                             </div>
                             <div class="form-control w-full max-w-xs">
                                 <label class="label">
                                     <span class="label-text">Total price</span>
                                 </label>
-                                <input name='total_price' type="text" value={totalPrice} class="input input-bordered w-full max-w-xs" />
+                                <input disabled={true} name='total_price' type="text" placeholder='Total Price' value={totalPrice} class="input input-bordered w-full max-w-xs" />
                             </div>
                             <div class="form-control w-full max-w-xs">
                                 <label class="label">
                                     <span class="label-text">Transaction Id</span>
                                 </label>
-                                <input name='transaction_id' value={transactionId} type="text" placeholder='Transaction Id' class="input input-bordered w-full max-w-xs" />
+                                <input disabled={true} name='transaction_id' value={newTransactionId} type="text" class="input input-bordered w-full max-w-xs" />
                             </div>
 
                             <div class="form-control w-full max-w-xs mt-3">
-                                <input type="submit" value='Order Now' class="btn btn-secondary w-full max-w-xs" />
+                                <input type="submit" defaultValue='Order Now' class="btn btn-secondary w-full max-w-xs" />
                             </div>
-                            
+
                         </form>
                     </div>
                 </div>
-                <div class="card w-96 bg-primary shadow-xl">
-                    <div class="card-body text-accent">
+                <div className='bg-primary w-100'>
+                    <h1 className='text-3xl text-center p-3'>Pay First for Confirm Order</h1>
+                    <div className=' text-left p-6'>
                         <Elements stripe={stripePromise}>
-                            <CheckoutForm purchaseItem={purchaseItem} transactionId={transactionId} setTransactionId={setTransactionId} totalPrice={totalPrice} />
+                            <CheckoutForm newTransactionId={newTransactionId} setnewTransactionId={setnewTransactionId} totalPrice={totalPrice} />
                         </Elements>
+                        <div className='mt-6'>
+                            <h1 className='text-2xl'>Some Instruction:</h1>
+                            <ul>
+                                <li><p>At first set the Quantity of the product.</p></li>
+                                <li><p>Then Price will be set automatically by unit price.</p></li>
+                                <li><p>Then Purchase the payment for confirm Order.</p></li>
+                                <li><p>After Payment Your transaction Id will be filled up automatically</p></li>
+                                <li><p>Without payment, Your order will be a pending order and you can purchase it later also.</p></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -7,18 +7,20 @@ import {
 } from '@stripe/react-stripe-js';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
-const CheckoutForm = ({ purchaseItem }) => {
+import Loading from '../Shared/Loading/Loading';
+const CheckoutForm = ({ newtransactionId, setnewTransactionId, totalPrice }) => {
     const stripe = useStripe();
     const elements = useElements();
+    const [transactionId, setTransactionId] = useState('');
     const [cardError, setCardError] = useState('');
     const [clientSecret, setClientSecret] = useState('');
     const [success, setSuccess] = useState('');
     const [processing, setProcessing] = useState(false);
-    const [transactionId, setTransactionId] = useState('');
+    
     const [user] = useAuthState(auth)
-    const { price } = purchaseItem;
+    // const { price } = purchaseItem;
+    let price = totalPrice;
     const { name, email } = user;
-
     useEffect(() => {
         fetch('http://localhost:5000/create-payment-intent', {
             method: 'POST',
@@ -36,7 +38,9 @@ const CheckoutForm = ({ purchaseItem }) => {
             });
 
     }, [price])
-
+    if(processing){
+        return <Loading></Loading>
+    }
     const handleSubmit = async (event) => {
         event.preventDefault();
 
@@ -78,6 +82,7 @@ const CheckoutForm = ({ purchaseItem }) => {
         else {
             setCardError('');
             setTransactionId(paymentIntent.id);
+            setnewTransactionId(paymentIntent.id);
             console.log(paymentIntent);
             setSuccess('Thank you. We have received your payment')
 
