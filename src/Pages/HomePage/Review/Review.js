@@ -1,12 +1,15 @@
 import React from 'react';
 
 const Review = ({ review }) => {
-    const { name, desc, rating, img } = review;
+    let { name, desc, rating, img } = review;
+    rating = parseInt(rating);
+
+
     return (
         <div class="card w-96 bg-primary text-primary-content">
             <div class="avatar justify-start ml-6 mt-6">
                 <div class="w-16 rounded-full ring ring-secondary ring-offset-base-100 ring-offset-2">
-                    <img src={img} />
+                    <img src={img ? img : 'https://images.unsplash.com/photo-1599508704512-2f19efd1e35f?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=60&raw_url=true&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cXVlc3Rpb24lMjBtYXJrJTIwcGhvdG98ZW58MHx8MHx8&auto=format&fit=crop&w=500'} />
                 </div>
             </div>
             <div class="card-body text-left">

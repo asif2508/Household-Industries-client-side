@@ -21,6 +21,7 @@ import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import RequiredAdmin from './Pages/Authentication/RequiredAdmin/RequiredAdmin';
 import Purchase from './Pages/Purchase/Purchase';
+import Pending from './Pages/Purchase/Pending';
 function App() {
   return (
     <div className="App">
@@ -45,6 +46,8 @@ function App() {
           <Route path='/dashboard/makeadmin' element={<RequiredAdmin><MakeAdmin></MakeAdmin></RequiredAdmin>}></Route>
         </Route>
         <Route path='/purchase/:id' element={<RequiredAuth><Purchase></Purchase></RequiredAuth>}></Route>
+        <Route path='/pending/:id' element={<RequiredAuth><Pending></Pending></RequiredAuth>}></Route>
+
         <Route path='*' element={<NotFound></NotFound>}></Route>
       </Routes>
       <Footer></Footer>

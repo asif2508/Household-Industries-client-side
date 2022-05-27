@@ -1,13 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Loading from '../Shared/Loading/Loading';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { loadStripe } from '@stripe/stripe-js';
 import {
-    CardElement,
-    Elements,
-    useStripe,
-    useElements,
+    Elements
 } from '@stripe/react-stripe-js';
 import CheckoutForm from './CheckoutForm';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -22,19 +19,21 @@ const Purchase = () => {
     const [quantity, setQuantity] = useState(0);
     const [quantityError, setQuantityError] = useState('');
     const [totalPrice, setTotalPrice] = useState(0);
-    const { isLoading, data: purchaseItem } = useQuery('purchaseItem', () => fetch(`http://localhost:5000/products/${id}`, {
+    const [purchaseItem, setPurchaseItem] = useState([]);
+    
+    useEffect(()=>{
+        fetch(`http://localhost:5000/products/${id}`, {
         method: "GET",
         headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`
         }
-    }).then(res => res.json()));
-
-    if (isLoading) {
-        return <Loading></Loading>
-    }
+    }).then(res => res.json())
+    .then(data => setPurchaseItem(data))
+    },[id, user, purchaseItem]);
+    
+    
     const { _id, img, desc, name, price, minimum, available } = purchaseItem;
     const { displayName, email } = user;
-
     const handleQuantity = event => {
         const quantity = event.target.value;
         setQuantity(quantity);
@@ -91,9 +90,13 @@ const Purchase = () => {
         setQuantity(0);
         event.target.pquantity.value = 0;
         event.target.transaction_id.value= null;
+        // event.target.product_id.value = '';
+        // event.target.product_name.value = '';
         setTotalPrice(0);
         setQuantityError('');
         setnewTransactionId(null);
+        event.target.reset();
+        
     }
     return (
         <div className='flex justify-center mt-12 mb-16'>
@@ -129,7 +132,7 @@ const Purchase = () => {
                                 <label class="label">
                                     <span class="label-text">Product Id</span>
                                 </label>
-                                <input name='product_id' disabled={true} type="text" defaultValue={_id} class="input input-bordered w-full max-w-xs" />
+                                <input name='product_id'  disabled={true} type="text" defaultValue={_id} class="input input-bordered w-full max-w-xs" />
                             </div>
                             <div class="form-control w-full max-w-xs">
                                 <label class="label">
@@ -150,17 +153,17 @@ const Purchase = () => {
                                 <label class="label">
                                     <span class="label-text">Total price</span>
                                 </label>
-                                <input disabled={true} name='total_price' type="text" placeholder='Total Price' value={totalPrice} class="input input-bordered w-full max-w-xs" />
+                                <input disabled={true} name='total_price' type="text" placeholder='Total Price' defaultValue={totalPrice} class="input input-bordered w-full max-w-xs" />
                             </div>
                             <div class="form-control w-full max-w-xs">
                                 <label class="label">
                                     <span class="label-text">Transaction Id</span>
                                 </label>
-                                <input disabled={true} name='transaction_id' value={newTransactionId} type="text" class="input input-bordered w-full max-w-xs" />
+                                <input disabled={true} name='transaction_id' defaultValue={newTransactionId} type="text" class="input input-bordered w-full max-w-xs" />
                             </div>
 
                             <div class="form-control w-full max-w-xs mt-3">
-                                <input type="submit" defaultValue='Order Now' class="btn btn-secondary w-full max-w-xs" />
+                                <input type="submit" value='Order Now' class="btn btn-secondary w-full max-w-xs" />
                             </div>
 
                         </form>

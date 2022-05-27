@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useQuery } from 'react-query';
 import auth from '../../firebase.init';
@@ -8,11 +8,12 @@ import MyOrder from './MyOrder';
 const MyOrders = () => {
     const [user] = useAuthState(auth);
     const {email} = user;
-    const { isLoading, data: myorders } = useQuery('myorders', () => fetch(`http://localhost:5000/myorders/${email}`).then(res => res.json()));
-    if (isLoading) {
-        return <Loading></Loading>
-    }
-    console.log(myorders);
+    const [myorders, setMyOrders] = useState([]);
+    useEffect(()=>{
+        fetch(`http://localhost:5000/myorders/${email}`)
+        .then(res => res.json())
+        .then(data => setMyOrders(data))
+    },[myorders, user]);
     return (
         <div>
             <div class="overflow-x-auto">

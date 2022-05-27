@@ -8,7 +8,8 @@ import {
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import Loading from '../Shared/Loading/Loading';
-const CheckoutForm = ({ newtransactionId, setnewTransactionId, totalPrice }) => {
+import { toast } from 'react-toastify';
+const CheckoutForm = ({ newTransactionId, setnewTransactionId, totalPrice }) => {
     const stripe = useStripe();
     const elements = useElements();
     const [transactionId, setTransactionId] = useState('');
@@ -84,6 +85,7 @@ const CheckoutForm = ({ newtransactionId, setnewTransactionId, totalPrice }) => 
             setTransactionId(paymentIntent.id);
             setnewTransactionId(paymentIntent.id);
             console.log(paymentIntent);
+            toast.info('We have received your payment. Confirm now!')
             setSuccess('Thank you. We have received your payment')
 
 
@@ -118,10 +120,10 @@ const CheckoutForm = ({ newtransactionId, setnewTransactionId, totalPrice }) => 
                 cardError && <p className='text-secondary mt-3'>{cardError}</p>
             }
             {
-                success && <div className='text-secondary mt-3'>
-                    <p>{success}  </p>
-                    <p>Your transaction Id: <span className="text-orange-500 font-bold">{transactionId}</span> </p>
-                </div>
+                // success && <div className='text-secondary mt-3'>
+                //     <p>{success}  </p>
+                //     <p>Your transaction Id: <span className="text-orange-500 font-bold">{transactionId}</span> </p>
+                // </div>
             }
         </div>
     );
