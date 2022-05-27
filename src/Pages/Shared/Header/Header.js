@@ -15,6 +15,7 @@ const Header = () => {
     }
     const navigations = <>
         <li><Link to='/' >Home</Link></li>
+        <li><Link to='/allproduct' >Products</Link></li>
         <li><Link to='/portfolio' >My Portfolio</Link></li>
         <li><Link to='/blogs' >Blogs</Link></li>
         {user ? 

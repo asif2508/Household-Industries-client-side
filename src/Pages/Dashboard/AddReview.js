@@ -25,13 +25,14 @@ const AddReview = () => {
         })
         .then(res => {
             if(res.ok){
+                toast('Review Added Successfully');
                 return res.json()
             }else{
                 return toast("failed to review");
             }
         })
         .then(data => console.log(data))
-        toast('Review Added Successfully');
+        
     event.target.reset();
     }
 

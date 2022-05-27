@@ -19,7 +19,7 @@ const AddProduct = () => {
             price: price,
             img: img
         }
-        fetch(`http://localhost:5000/prodcuts`, {
+        fetch(`http://localhost:5000/products`, {
             method: "POST",
             headers: {
                 'content-type': 'application/json'
@@ -28,13 +28,13 @@ const AddProduct = () => {
         })
             .then(res => {
                 if (res.ok) {
+                    toast('Product Added Successfully');
                     return res.json()
                 } else {
-                    return toast("failed to review");
+                    return toast("failed to add product");
                 }
             })
             .then(data => console.log(data))
-        toast('Review Added Successfully');
         event.target.reset();
     }
     return (
