@@ -10,20 +10,15 @@ const stripePromise = loadStripe('pk_test_51L33S2Lc3FrHqLv7SfLbiwAnkW4Clt56SXVvo
 
 const Pending = () => {
     const [newTransactionId, setnewTransactionId] = useState(null);
-    const { id } = useParams();
+    const { _id } = useParams();
     const [searchParams] = useSearchParams();
-    const quantity = searchParams.get("quantity");
-    const email = searchParams.get("email");
     const totalPrice = searchParams.get("totalPrice");
     const handlePayment = () => {
         const data = {
-            id: id,
-            quantity: quantity,
-            email: email,
             newTransactionId: newTransactionId
         }
         console.log(data);
-        fetch(`http://localhost:5000/orders/`, {
+        fetch(`http://localhost:5000/orders/${_id}`, {
             method: "PUT",
             headers: {
                 'content-type': 'application/json'
@@ -32,20 +27,20 @@ const Pending = () => {
         })
             .then(res => {
                 if (res.ok) {
+                    toast.info('Your order has been confirmed!');
                     return res.json()
                 } else {
                     return toast("failed to order");
                 }
             })
             .then(data => console.log(data))
-            toast.info('Your order has been confirmed!');
     }
     return (
         <div className='flex justify-center'>
             <div class="card w-96 bg-primary shadow-xl mt-16 mb-16">
                 <div class="card-body">
                     <h1 className='text-xl text-center font-bold p-3'>Pay for Confirm Order</h1>
-                    <p>Total bill: ${totalPrice}</p>
+                    {/* <p>Total bill: ${totalPrice}</p> */}
                     <div className=' text-left p-6'>
                         <Elements stripe={stripePromise}>
                             <CheckoutForm newTransactionId={newTransactionId} setnewTransactionId={setnewTransactionId} totalPrice={totalPrice} />

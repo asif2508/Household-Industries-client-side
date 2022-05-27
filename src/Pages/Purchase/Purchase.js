@@ -29,7 +29,7 @@ const Purchase = () => {
         }
     }).then(res => res.json())
     .then(data => setPurchaseItem(data))
-    },[id, user, purchaseItem]);
+    },[id, user, purchaseItem, totalPrice]);
     
     
     const { _id, img, desc, name, price, minimum, available } = purchaseItem;
@@ -95,7 +95,7 @@ const Purchase = () => {
         setTotalPrice(0);
         setQuantityError('');
         setnewTransactionId(null);
-        event.target.reset();
+        // event.target.reset();
         
     }
     return (
@@ -153,7 +153,7 @@ const Purchase = () => {
                                 <label class="label">
                                     <span class="label-text">Total price</span>
                                 </label>
-                                <input disabled={true} name='total_price' type="text" placeholder='Total Price' defaultValue={totalPrice} class="input input-bordered w-full max-w-xs" />
+                                <input disabled={true} name='total_price' type="text" placeholder='Total Price' value={totalPrice} class="input input-bordered w-full max-w-xs" />
                             </div>
                             <div class="form-control w-full max-w-xs">
                                 <label class="label">

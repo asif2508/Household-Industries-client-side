@@ -47,7 +47,7 @@ function App() {
           <Route path='/dashboard/makeadmin' element={<RequiredAdmin><MakeAdmin></MakeAdmin></RequiredAdmin>}></Route>
         </Route>
         <Route path='/purchase/:id' element={<RequiredAuth><Purchase></Purchase></RequiredAuth>}></Route>
-        <Route path='/pending/:id' element={<RequiredAuth><Pending></Pending></RequiredAuth>}></Route>
+        <Route path='/pending/:_id' element={<RequiredAuth><Pending></Pending></RequiredAuth>}></Route>
         <Route path='/allproduct' element={<AllProduct></AllProduct>}></Route>
         <Route path='*' element={<NotFound></NotFound>}></Route>
       </Routes>
