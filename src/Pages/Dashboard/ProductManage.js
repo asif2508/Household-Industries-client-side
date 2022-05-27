@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { faTrash} from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 const ProductManage = ({product}) => {
     const {name, _id, minimum, available, price} = product;
     const handleDeleteItem = ()=>{
@@ -22,7 +23,7 @@ const ProductManage = ({product}) => {
             <td><p>{available}</p></td>
             <td><p>{minimum}</p></td>
             <td><p>${price}</p></td>
-            <td><button class="btn btn-secondary btn-sm">Manage</button ></td>
+            <td><Link to={`/addquantity/${_id}`} class="btn btn-secondary btn-sm">Manage</Link ></td>
 
             <td><button onClick={handleDeleteItem} class="btn btn-secondary btn-sm"><FontAwesomeIcon icon={faTrash}></FontAwesomeIcon></button ></td>
         </tr>

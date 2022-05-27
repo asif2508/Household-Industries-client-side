@@ -106,7 +106,7 @@ const Purchase = () => {
                     <img src={img} alt="" className='w-100' />
                     <div className=' text-left p-6 pr-0'>
                         <h2 class="card-title">{name}</h2>
-
+                        <p>Description: {desc}</p>
                         <p>Minimum Quantity to order: {minimum}</p>
                         <p>Total available products: {available}</p>
                         <p>Price per unit: ${price}</p>
@@ -114,7 +114,7 @@ const Purchase = () => {
                 </div>
                 <div className='bg-primary w-100'>
                     <h1 className='text-3xl text-center p-3'>Your order details</h1>
-                    <div className=' text-left p-6 pr-0'>
+                    <div className=' text-left p-6 pr-2'>
                         <form onSubmit={handleOrderSubmit}>
                             <div class="form-control w-full max-w-xs">
                                 <label class="label">

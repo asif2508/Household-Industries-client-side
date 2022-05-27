@@ -23,6 +23,7 @@ import RequiredAdmin from './Pages/Authentication/RequiredAdmin/RequiredAdmin';
 import Purchase from './Pages/Purchase/Purchase';
 import Pending from './Pages/Purchase/Pending';
 import AllProduct from './Pages/AllProducts/AllProduct';
+import AddQuantity from './Pages/Dashboard/AddQuantity';
 function App() {
   return (
     <div className="App">
@@ -48,6 +49,7 @@ function App() {
         </Route>
         <Route path='/purchase/:id' element={<RequiredAuth><Purchase></Purchase></RequiredAuth>}></Route>
         <Route path='/pending/:_id' element={<RequiredAuth><Pending></Pending></RequiredAuth>}></Route>
+        <Route path='/addquantity/:_id' element={<RequiredAdmin><AddQuantity></AddQuantity></RequiredAdmin>}></Route>
         <Route path='/allproduct' element={<AllProduct></AllProduct>}></Route>
         <Route path='*' element={<NotFound></NotFound>}></Route>
       </Routes>
