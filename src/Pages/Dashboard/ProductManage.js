@@ -1,7 +1,21 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-
+import { faTrash} from '@fortawesome/free-solid-svg-icons';
 const ProductManage = ({product}) => {
-    const {name, _id, minimum, available, price} = product
+    const {name, _id, minimum, available, price} = product;
+    const handleDeleteItem = ()=>{
+        fetch(`http://localhost:5000/products/${_id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ _id }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                })
+        }
     return (
         <tr>
             <td><p>{name}</p></td>
@@ -10,7 +24,7 @@ const ProductManage = ({product}) => {
             <td><p>${price}</p></td>
             <td><button class="btn btn-secondary btn-sm">Manage</button ></td>
 
-            <td><button class="btn btn-secondary btn-sm">Delete</button ></td>
+            <td><button onClick={handleDeleteItem} class="btn btn-secondary btn-sm"><FontAwesomeIcon icon={faTrash}></FontAwesomeIcon></button ></td>
         </tr>
     );
 };
