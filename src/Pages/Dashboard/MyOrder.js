@@ -22,7 +22,7 @@ const MyOrder = ({myorder}) => {
             <td><p>{product_name}</p></td>
             <td><p>{quantity}</p></td>
             <td><p>${totalPrice}</p></td>
-            <td>{!newTransactionId ? <Link to={`/pending/${_id}?&totalPrice=${totalPrice}`} class="btn btn-secondary btn-sm">Pay</Link> : <p>Paid</p>}</td>
+            <td>{!newTransactionId ? <Link to={`/pending/${_id}?&totalPrice=${totalPrice}&quantity=${quantity}`} class="btn btn-secondary btn-sm">Pay</Link> : <p>Paid</p>}</td>
             <td>{!newTransactionId ? <button onClick={handleDeleteItem} class="btn btn-secondary btn-sm">Cancel</button > : <p>Unavailable</p>}</td>
         </tr>
     );

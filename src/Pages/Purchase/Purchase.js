@@ -29,7 +29,7 @@ const Purchase = () => {
         }
     }).then(res => res.json())
     .then(data => setPurchaseItem(data))
-    },[id, user, purchaseItem, totalPrice]);
+    },[id, user, purchaseItem, totalPrice, newTransactionId]);
     
     
     const { _id, img, desc, name, price, minimum, available } = purchaseItem;
@@ -50,8 +50,7 @@ const Purchase = () => {
         const email = event.target.email.value;
         const product_id = event.target.product_id.value;
         const product_name = event.target.product_name.value;
-        // const quantity = event.target.quantity.value;
-        // const transection_Id = event.target.transection_id.value;
+
         if (quantity < minimum) {
             setQuantityError('Please Increase the quantity to minimum amount')
             return;
@@ -80,22 +79,34 @@ const Purchase = () => {
         })
         .then(res => {
             if(res.ok){
+                toast('Order Placed Successfully');
                 return res.json()
             }else{
                 return toast("failed to order");
             }
         })
         .then(data => console.log(data))
-        toast('Order Placed Successfully');
+        if(newTransactionId){
+            const updatedQuantity = parseInt(available) - parseInt(quantity);
+        const data = {
+            available: updatedQuantity
+        }
+        fetch(`http://localhost:5000/products/${_id}`, {
+            method: "PUT",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(data),
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
+        }
         setQuantity(0);
         event.target.pquantity.value = 0;
         event.target.transaction_id.value= null;
-        // event.target.product_id.value = '';
-        // event.target.product_name.value = '';
         setTotalPrice(0);
         setQuantityError('');
         setnewTransactionId(null);
-        // event.target.reset();
         
     }
     return (
@@ -163,7 +174,7 @@ const Purchase = () => {
                             </div>
 
                             <div class="form-control w-full max-w-xs mt-3">
-                                <input type="submit" value='Order Now' class="btn btn-secondary w-full max-w-xs" />
+                                <input type="submit" value='Confirm' class="btn btn-secondary w-full max-w-xs" />
                             </div>
 
                         </form>
