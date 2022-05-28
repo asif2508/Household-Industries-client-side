@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
     CardElement,
-    Elements,
     useStripe,
     useElements,
 } from '@stripe/react-stripe-js';

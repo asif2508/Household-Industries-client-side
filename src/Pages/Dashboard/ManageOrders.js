@@ -19,7 +19,7 @@ const ManageOrders = () => {
                             <th>Quantity</th>
                             <th>Total Price</th>
                             <th>Ordered by</th>
-                            <th>Pay</th>
+                            <th>Status</th>
                             <th>Delete/Shift</th>
                         </tr>
                     </thead>

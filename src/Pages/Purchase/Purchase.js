@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Loading from '../Shared/Loading/Loading';
-import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { loadStripe } from '@stripe/stripe-js';
 import {
@@ -55,7 +53,7 @@ const Purchase = () => {
             setQuantityError('Please Increase the quantity to minimum amount')
             return;
         }
-        else if (quantity < minimum) {
+        else if (quantity > available) {
             setQuantityError('Insufficient amount!')
             return;
         }
