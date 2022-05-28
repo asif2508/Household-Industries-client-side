@@ -4,14 +4,14 @@ import ManageOrder from './ManageOrder';
 const ManageOrders = () => {
     const [orders, setOrders] = useState([]);
     useEffect(()=>{
-        fetch(`http://localhost:5000/orders`)
+        fetch(`https://radiant-mountain-55714.herokuapp.com/orders`)
         .then(res => res.json())
         .then(data => setOrders(data))
     },[orders]);
     return (
         <div>
-            <div class="overflow-x-auto">
-                <table class="table table-zebra w-full">
+            <div className="overflow-x-auto">
+                <table className="table table-zebra w-full">
                     {/* <!-- head --> */}
                     <thead>
                         <tr>

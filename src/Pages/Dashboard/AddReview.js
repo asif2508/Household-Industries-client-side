@@ -16,7 +16,7 @@ const AddReview = () => {
             rating: rating,
             img: photoURL
         }
-        fetch(`http://localhost:5000/reviews`,{
+        fetch(`https://radiant-mountain-55714.herokuapp.com/reviews`,{
             method: "POST",
             headers:{
                 'content-type': 'application/json'
@@ -38,30 +38,30 @@ const AddReview = () => {
 
     return (
         <div className='flex justify-center mt-16 mb-32'>
-            <div class="card w-96 bg-primary shadow-xl">
-                <div class="card-body">
-                    <h2 class="card-title">Add a Review</h2>
-                    <div class="">
+            <div className="card w-96 bg-primary shadow-xl">
+                <div className="card-body">
+                    <h2 className="card-title">Add a Review</h2>
+                    <div className="">
                         <form onSubmit={handleAddReview}>
-                            <div class="avatar mt-8">
-                                <div class="w-24 mask mask-squircle">
+                            <div className="avatar mt-8">
+                                <div className="w-24 mask mask-squircle">
                                     <img src={user.photoURL ? user.photoURL : 'https://images.unsplash.com/photo-1599508704512-2f19efd1e35f?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=60&raw_url=true&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cXVlc3Rpb24lMjBtYXJrJTIwcGhvdG98ZW58MHx8MHx8&auto=format&fit=crop&w=500'} />
                                 </div>
                             </div>
-                            <div class="form-control w-full max-w-xs mb-5">
+                            <div className="form-control w-full max-w-xs mb-5">
                                 <p className='text-left mb-2'>Name</p>
-                                <input type="text" disabled={true} value={user?.displayName} class="input input-bordered w-full max-w-xs" required/>
+                                <input type="text" disabled={true} value={user?.displayName} className="input input-bordered w-full max-w-xs" required/>
                             </div>
-                            <div class="form-control w-full max-w-xs mb-5">
+                            <div className="form-control w-full max-w-xs mb-5">
                                 <p className='text-left mb-2'>Description</p>
-                                <textarea name='desc' type="text" placeholder='Description' class="textarea textarea-bordered h-24 w-full max-w-xs" required/>
+                                <textarea name='desc' type="text" placeholder='Description' className="textarea textarea-bordered h-24 w-full max-w-xs" required/>
                             </div>
-                            <div class="form-control w-full max-w-xs mb-5">
+                            <div className="form-control w-full max-w-xs mb-5">
                                 <p className='text-left mb-2'>Rating</p>
-                                <input name='rating' type="number" placeholder='Please Rate between 1 to 5' class="input input-bordered w-full max-w-xs" required/>
+                                <input name='rating' type="number" placeholder='Please Rate between 1 to 5' className="input input-bordered w-full max-w-xs" required/>
                             </div>
-                            <div class="form-control w-full max-w-xs mb-5">
-                            <input class="btn btn-secondary" type="submit" value="Add" />
+                            <div className="form-control w-full max-w-xs mb-5">
+                            <input className="btn btn-secondary" type="submit" value="Add" />
                         </div>
 
                         </form>

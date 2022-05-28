@@ -5,9 +5,9 @@ import Tool from '../Tool/Tool';
 
 const Tools = () => {
     
-    const { isLoading, data:tools } = useQuery('tools', ()=> fetch('http://localhost:5000/products').then(res => res.json()));
+    const { isLoading, data:tools } = useQuery('tools', ()=> fetch('https://radiant-mountain-55714.herokuapp.com/products').then(res => res.json()));
     if(isLoading){
-        return <button class="btn btn-square loading"></button>
+        return <button className="btn btn-square loading"></button>
     }
     return (
         <div className='bg-base-100'>
@@ -15,12 +15,12 @@ const Tools = () => {
             <div className='grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-12 md:mx-12 lg:mx-12'>
                 {
                     tools?.slice(0,4).map(tool => <Tool
-                    
+                    key={tool._id}
                     tool = {tool}
                     ></Tool>)
                 }
             </div>
-            <Link to='/allproduct' class="btn btn-secondary mt-6">SEE ALL PRODUCTS</Link>
+            <Link to='/allproduct' className="btn btn-secondary mt-6">SEE ALL PRODUCTS</Link>
         </div>
     );
 };

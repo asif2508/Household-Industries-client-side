@@ -38,18 +38,18 @@ const Login = () => {
     }
     return (
         <div className='flex justify-center mt-12 mb-16'>
-            <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-primary">
+            <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-primary">
                 <h1 className='text-3xl mt-4 mb-0'>Login</h1>
-                <div class="card-body">
+                <div className="card-body">
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        <div class="form-control">
-                            <label class="label">
-                                <span class="label-text">Email</span>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Email</span>
                             </label>
                             <input
                                 type="email"
                                 placeholder="Email"
-                                class="input input-bordered"
+                                className="input input-bordered"
                                 {...register("email", {
                                     required: {
                                         value: true,
@@ -66,14 +66,14 @@ const Login = () => {
                                 {errors.email?.type === 'pattern' && <span className="label-text-alt text-red-500">{errors.email?.message}</span>}
                             </label>
                         </div>
-                        <div class="form-control">
-                            <label class="label">
-                                <span class="label-text">Password</span>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Password</span>
                             </label>
                             <input
                                 type="password"
                                 placeholder="Password"
-                                class="input input-bordered"
+                                className="input input-bordered"
                                 {...register("password", {
                                     required: {
                                         value: true,
@@ -89,8 +89,8 @@ const Login = () => {
                                 {errors.password?.type === 'required' && <span className="label-text-alt text-red-500">{errors.password?.message}</span>}
                                 {errors.password?.type === 'pattern' && <span className="label-text-alt text-red-500">{errors.password?.message}</span>}
                             </label>
-                            <label class="label text-secondary">
-                                <a href="#" class="label-text-alt link link-hover link-secondary">Forgot password?</a>
+                            <label className="label text-secondary">
+                                <a href="#" className="label-text-alt link link-hover link-secondary">Forgot password?</a>
                             </label>
                         </div>
                         {error && <label className="label text-error">
@@ -99,18 +99,18 @@ const Login = () => {
                         {gerror && <label className="label text-error">
                             {gerror?.message}
                         </label>}
-                        <input class="btn btn-secondary w-full" type="submit" value='Login' />
+                        <input className="btn btn-secondary w-full" type="submit" value='Login' />
                     </form>
                     <div className='flex items-center'>
-                        <label class="label">
+                        <label className="label">
                             <small>Don't have an account?</small>
                         </label>
-                        <label class="label">
-                            <Link to='/register' class="label-text-alt link link-hover link-secondary">Register now</Link>
+                        <label className="label">
+                            <Link to='/register' className="label-text-alt link link-hover link-secondary">Register now</Link>
                         </label>
                     </div>
-                    <div class="divider">OR</div>
-                    <button onClick={handleSignInGoogle} class="btn btn-secondary">sign in with Google</button>
+                    <div className="divider">OR</div>
+                    <button onClick={handleSignInGoogle} className="btn btn-secondary">sign in with Google</button>
                 </div>
             </div>
 

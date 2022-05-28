@@ -4,14 +4,14 @@ import ProductManage from './ProductManage';
 const ManageProduct = () => {
     const [products, setProducts] = useState([]);
     useEffect(()=>{
-        fetch(`http://localhost:5000/products`)
+        fetch(`https://radiant-mountain-55714.herokuapp.com/products`)
         .then(res => res.json())
         .then(data => setProducts(data))
     },[products]);
     return (
         <div>
-            <div class="overflow-x-auto">
-                <table class="table table-zebra w-full">
+            <div className="overflow-x-auto">
+                <table className="table table-zebra w-full">
                     {/* <!-- head --> */}
                     <thead>
                         <tr>

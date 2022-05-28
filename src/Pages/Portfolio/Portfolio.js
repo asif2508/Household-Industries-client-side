@@ -20,8 +20,8 @@ const Portfolio = () => {
 
                 </div>
                 <div>
-                    <div class="avatar px-28 py-5">
-                        <div class="w-49 rounded-full">
+                    <div className="avatar px-28 py-5">
+                        <div className="w-49 rounded-full">
                             <img src={me} />
                         </div>
                     </div>

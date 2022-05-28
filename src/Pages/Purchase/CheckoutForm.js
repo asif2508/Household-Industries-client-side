@@ -22,7 +22,7 @@ const CheckoutForm = ({ newTransactionId, setnewTransactionId, totalPrice }) => 
     let price = totalPrice;
     const { name, email } = user;
     useEffect(() => {
-        fetch('http://localhost:5000/create-payment-intent', {
+        fetch('https://radiant-mountain-55714.herokuapp.com/create-payment-intent', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

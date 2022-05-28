@@ -21,7 +21,7 @@ const Header = () => {
         {user ? 
         <>
         <li><Link to='/dashboard' >Dashboard</Link></li>
-        <li><button onClick={handleSignOut} class="btn btn-secondary">Sign out</button></li>
+        <li><button onClick={handleSignOut} className="btn btn-secondary">Sign out</button></li>
         
         </>
         :
@@ -39,7 +39,7 @@ const Header = () => {
                     </ul>
                 </div>
                 <a className="btn btn-ghost normal-case text-xl">Household Industrial</a>
-                <label for="my-drawer-2" class="btn btn-secondary drawer-button lg:hidden"><FontAwesomeIcon icon={faBars}></FontAwesomeIcon></label>
+                <label htmlFor="my-drawer-2" className="btn btn-secondary drawer-button lg:hidden"><FontAwesomeIcon icon={faBars}></FontAwesomeIcon></label>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-16">

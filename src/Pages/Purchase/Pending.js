@@ -18,7 +18,7 @@ const Pending = () => {
             newTransactionId: newTransactionId
         }
         console.log(data);
-        fetch(`http://localhost:5000/orders/${_id}`, {
+        fetch(`https://radiant-mountain-55714.herokuapp.com/orders/${_id}`, {
             method: "PUT",
             headers: {
                 'content-type': 'application/json'
@@ -37,16 +37,16 @@ const Pending = () => {
     }
     return (
         <div className='flex justify-center'>
-            <div class="card w-96 bg-primary shadow-xl mt-16 mb-16">
-                <div class="card-body">
+            <div className="card w-96 bg-primary shadow-xl mt-16 mb-16">
+                <div className="card-body">
                     <h1 className='text-xl text-center font-bold p-3'>Pay for Confirm Order</h1>
                     {/* <p>Total bill: ${totalPrice}</p> */}
                     <div className=' text-left p-6'>
                         <Elements stripe={stripePromise}>
                             <CheckoutForm newTransactionId={newTransactionId} setnewTransactionId={setnewTransactionId} totalPrice={totalPrice} />
                         </Elements>
-                        <div class="card-actions justify-end">
-                            <button onClick={handlePayment} class="btn btn-secondary">Confirm</button>
+                        <div className="card-actions justify-end">
+                            <button onClick={handlePayment} className="btn btn-secondary">Confirm</button>
                         </div>
                     </div>
                 </div>

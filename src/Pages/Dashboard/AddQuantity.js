@@ -6,7 +6,7 @@ const AddQuantity = () => {
     const { _id } = useParams()
     const [product, setProduct] = useState({});
     useEffect(() => {
-        fetch(`http://localhost:5000/manage/${_id}`)
+        fetch(`https://radiant-mountain-55714.herokuapp.com/manage/${_id}`)
             .then(res => res.json())
             .then(data => setProduct(data))
     }, [_id, product]);
@@ -19,7 +19,7 @@ const AddQuantity = () => {
         const data = {
             available: updatedQuantity
         }
-        fetch(`http://localhost:5000/products/${_id}`, {
+        fetch(`https://radiant-mountain-55714.herokuapp.com/products/${_id}`, {
             method: "PUT",
             headers: {
                 'content-type': 'application/json'
@@ -44,7 +44,7 @@ const AddQuantity = () => {
         const data = {
             price: updatedPrice
         }
-        fetch(`http://localhost:5000/products/${_id}`, {
+        fetch(`https://radiant-mountain-55714.herokuapp.com/products/${_id}`, {
             method: "PUT",
             headers: {
                 'content-type': 'application/json'
@@ -70,7 +70,7 @@ const AddQuantity = () => {
         const data = {
             minimum: updatedMinimum
         }
-        fetch(`http://localhost:5000/products/${_id}`, {
+        fetch(`https://radiant-mountain-55714.herokuapp.com/products/${_id}`, {
             method: "PUT",
             headers: {
                 'content-type': 'application/json'
@@ -95,7 +95,7 @@ const AddQuantity = () => {
                     <h1 className='text-3xl text-center p-3'>About the Product</h1>
                     <img src={img} alt="" className='w-100' />
                     <div className=' text-left p-6 pr-2'>
-                        <h2 class="card-title">{name}</h2>
+                        <h2 className="card-title">{name}</h2>
                         <p>Description: {desc}</p>
                         <p>Minimum Quantity to order: {minimum}</p>
                         <p>Total available products: {available}</p>
@@ -105,14 +105,14 @@ const AddQuantity = () => {
                 <div className='bg-primary w-100 pl-6'>
                     <h1 className='text-3xl text-center p-3'>Increase Quantity</h1>
                     <form onSubmit={handleIncreaseQuantity}>
-                        <div class="form-control w-full max-w-xs">
-                            <label class="label">
-                                <span class="label-text">Name</span>
+                        <div className="form-control w-full max-w-xs">
+                            <label className="label">
+                                <span className="label-text">Name</span>
                             </label>
-                            <input name='quantity' placeholder='Number should be Increased' type="number" class="input input-bordered w-full max-w-xs" />
+                            <input name='quantity' placeholder='Number should be Increased' type="number" className="input input-bordered w-full max-w-xs" />
                         </div>
-                        <div class="form-control w-full max-w-xs mt-3">
-                            <input type="submit" value='Increase' class="btn btn-secondary w-full max-w-xs" />
+                        <div className="form-control w-full max-w-xs mt-3">
+                            <input type="submit" value='Increase' className="btn btn-secondary w-full max-w-xs" />
                         </div>
                     </form>
                     <h3 className="text-3xl mt-32 font-['Open_Sans']"><blockquote>"A thing of beauty is joy forever."</blockquote></h3>
@@ -121,14 +121,14 @@ const AddQuantity = () => {
                     <div className='bg-primary w-100 pl-6'>
                         <h1 className='text-3xl text-center p-3'>Update Price</h1>
                         <form onSubmit={handleUpdatePrice}>
-                            <div class="form-control w-full max-w-xs">
-                                <label class="label">
-                                    <span class="label-text">Price Per Unit</span>
+                            <div className="form-control w-full max-w-xs">
+                                <label className="label">
+                                    <span className="label-text">Price Per Unit</span>
                                 </label>
-                                <input name='price' placeholder='New Price' type="number" class="input input-bordered w-full max-w-xs" />
+                                <input name='price' placeholder='New Price' type="number" className="input input-bordered w-full max-w-xs" />
                             </div>
-                            <div class="form-control w-full max-w-xs mt-3">
-                                <input type="submit" value='Update' class="btn btn-secondary w-full max-w-xs" />
+                            <div className="form-control w-full max-w-xs mt-3">
+                                <input type="submit" value='Update' className="btn btn-secondary w-full max-w-xs" />
                             </div>
                         </form>
 
@@ -136,14 +136,14 @@ const AddQuantity = () => {
                     <div className='bg-primary w-100 pl-6'>
                         <h1 className='text-3xl text-center p-3'>Update Minimum Order Quantity</h1>
                         <form onSubmit={handleMinimumOrder}>
-                            <div class="form-control w-full max-w-xs">
-                                <label class="label">
-                                    <span class="label-text">Minimum Order</span>
+                            <div className="form-control w-full max-w-xs">
+                                <label className="label">
+                                    <span className="label-text">Minimum Order</span>
                                 </label>
-                                <input name='minimum' placeholder='New minimum Order Quantity' type="number" class="input input-bordered w-full max-w-xs" />
+                                <input name='minimum' placeholder='New minimum Order Quantity' type="number" className="input input-bordered w-full max-w-xs" />
                             </div>
-                            <div class="form-control w-full max-w-xs mt-3">
-                                <input type="submit" value='Update' class="btn btn-secondary w-full max-w-xs" />
+                            <div className="form-control w-full max-w-xs mt-3">
+                                <input type="submit" value='Update' className="btn btn-secondary w-full max-w-xs" />
                             </div>
                         </form>
 

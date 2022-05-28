@@ -20,7 +20,7 @@ const Purchase = () => {
     const [purchaseItem, setPurchaseItem] = useState([]);
     
     useEffect(()=>{
-        fetch(`http://localhost:5000/products/${id}`, {
+        fetch(`https://radiant-mountain-55714.herokuapp.com/products/${id}`, {
         method: "GET",
         headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -68,7 +68,7 @@ const Purchase = () => {
             newTransactionId: newTransactionId
         }
         console.log(data);
-        fetch(`http://localhost:5000/orders`,{
+        fetch(`https://radiant-mountain-55714.herokuapp.com/orders`,{
             method: "POST",
             headers:{
                 'content-type': 'application/json'
@@ -89,7 +89,7 @@ const Purchase = () => {
         const data = {
             available: updatedQuantity
         }
-        fetch(`http://localhost:5000/products/${_id}`, {
+        fetch(`https://radiant-mountain-55714.herokuapp.com/products/${_id}`, {
             method: "PUT",
             headers: {
                 'content-type': 'application/json'
@@ -114,7 +114,7 @@ const Purchase = () => {
                     <h1 className='text-3xl text-center p-3'>About the Product</h1>
                     <img src={img} alt="" className='w-100' />
                     <div className=' text-left p-6 pr-0'>
-                        <h2 class="card-title">{name}</h2>
+                        <h2 className="card-title">{name}</h2>
                         <p>Description: {desc}</p>
                         <p>Minimum Quantity to order: {minimum}</p>
                         <p>Total available products: {available}</p>
@@ -125,54 +125,54 @@ const Purchase = () => {
                     <h1 className='text-3xl text-center p-3'>Your order details</h1>
                     <div className=' text-left p-6 pr-2'>
                         <form onSubmit={handleOrderSubmit}>
-                            <div class="form-control w-full max-w-xs">
-                                <label class="label">
-                                    <span class="label-text">Name</span>
+                            <div className="form-control w-full max-w-xs">
+                                <label className="label">
+                                    <span className="label-text">Name</span>
                                 </label>
-                                <input name='name' disabled={true} type="text" defaultValue={displayName} class="input input-bordered w-full max-w-xs" />
+                                <input name='name' disabled={true} type="text" defaultValue={displayName} className="input input-bordered w-full max-w-xs" />
                             </div>
-                            <div class="form-control w-full max-w-xs">
-                                <label class="label">
-                                    <span class="label-text">Email</span>
+                            <div className="form-control w-full max-w-xs">
+                                <label className="label">
+                                    <span className="label-text">Email</span>
                                 </label>
-                                <input name='email' disabled={true} type="text" defaultValue={email} class="input input-bordered w-full max-w-xs" />
+                                <input name='email' disabled={true} type="text" defaultValue={email} className="input input-bordered w-full max-w-xs" />
                             </div>
-                            <div class="form-control w-full max-w-xs">
-                                <label class="label">
-                                    <span class="label-text">Product Id</span>
+                            <div className="form-control w-full max-w-xs">
+                                <label className="label">
+                                    <span className="label-text">Product Id</span>
                                 </label>
-                                <input name='product_id'  disabled={true} type="text" defaultValue={_id} class="input input-bordered w-full max-w-xs" />
+                                <input name='product_id'  disabled={true} type="text" defaultValue={_id} className="input input-bordered w-full max-w-xs" />
                             </div>
-                            <div class="form-control w-full max-w-xs">
-                                <label class="label">
-                                    <span class="label-text">Product Name</span>
+                            <div className="form-control w-full max-w-xs">
+                                <label className="label">
+                                    <span className="label-text">Product Name</span>
                                 </label>
-                                <input name='product_name' disabled={true} type="text" defaultValue={name} class="input input-bordered w-full max-w-xs" />
+                                <input name='product_name' disabled={true} type="text" defaultValue={name} className="input input-bordered w-full max-w-xs" />
                             </div>
-                            <div class="form-control w-full max-w-xs">
-                                <label class="label">
-                                    <span class="label-text">Order Quantity</span>
+                            <div className="form-control w-full max-w-xs">
+                                <label className="label">
+                                    <span className="label-text">Order Quantity</span>
                                 </label>
-                                <input onBlur={handleQuantity} name='pquantity' type="number" placeholder={`min ${minimum} to max ${available}`} class="input input-bordered w-full max-w-xs" />
-                                {quantityError && <label class="label">
-                                    <span class="label-text">{quantityError}</span>
+                                <input onBlur={handleQuantity} name='pquantity' type="number" placeholder={`min ${minimum} to max ${available}`} className="input input-bordered w-full max-w-xs" />
+                                {quantityError && <label className="label">
+                                    <span className="label-text">{quantityError}</span>
                                 </label>}
                             </div>
-                            <div class="form-control w-full max-w-xs">
-                                <label class="label">
-                                    <span class="label-text">Total price</span>
+                            <div className="form-control w-full max-w-xs">
+                                <label className="label">
+                                    <span className="label-text">Total price</span>
                                 </label>
-                                <input disabled={true} name='total_price' type="text" placeholder='Total Price' value={totalPrice} class="input input-bordered w-full max-w-xs" />
+                                <input disabled={true} name='total_price' type="text" placeholder='Total Price' value={totalPrice} className="input input-bordered w-full max-w-xs" />
                             </div>
-                            <div class="form-control w-full max-w-xs">
-                                <label class="label">
-                                    <span class="label-text">Transaction Id</span>
+                            <div className="form-control w-full max-w-xs">
+                                <label className="label">
+                                    <span className="label-text">Transaction Id</span>
                                 </label>
-                                <input disabled={true} name='transaction_id' defaultValue={newTransactionId} type="text" class="input input-bordered w-full max-w-xs" />
+                                <input disabled={true} name='transaction_id' defaultValue={newTransactionId} type="text" className="input input-bordered w-full max-w-xs" />
                             </div>
 
-                            <div class="form-control w-full max-w-xs mt-3">
-                                <input type="submit" value='Confirm' class="btn btn-secondary w-full max-w-xs" />
+                            <div className="form-control w-full max-w-xs mt-3">
+                                <input type="submit" value='Confirm' className="btn btn-secondary w-full max-w-xs" />
                             </div>
 
                         </form>

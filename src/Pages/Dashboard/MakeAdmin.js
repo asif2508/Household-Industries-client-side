@@ -4,7 +4,7 @@ import Users from './Users';
 const MakeAdmin = () => {
     const [users, setUsers] = useState([]);
     useEffect(()=>{
-        fetch('http://localhost:5000/users',{
+        fetch('https://radiant-mountain-55714.herokuapp.com/users',{
             method: "GET",
             headers:{
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -17,8 +17,8 @@ const MakeAdmin = () => {
         <div className='border-2 border-solid-black'>
             <div className='xs:pl-3 sm:pl-3 lg:pl-12 bg-neutral flex justify-start flex-col pb-16 h-vh'>
                 <h1 className='text-3xl pt-2'>Manage Users and Admins</h1>
-                <div class="overflow-x-auto">
-                    <table class="table table-zebra w-full">
+                <div className="overflow-x-auto">
+                    <table className="table table-zebra w-full">
                         <thead>
                             <tr>
                                 <th>#</th>

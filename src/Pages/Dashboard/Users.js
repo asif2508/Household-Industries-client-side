@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const Users = ({index,user}) => {
     const {_id,email, role} = user;
     const handleAdmin =()=>{
-        fetch(`http://localhost:5000/users/admin/${email}`,{
+        fetch(`https://radiant-mountain-55714.herokuapp.com/users/admin/${email}`,{
             method: "PUT",
             headers:{
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -21,7 +21,7 @@ const Users = ({index,user}) => {
         })
     }
     const handleDeleteItem = ()=>{
-        fetch(`http://localhost:5000/users/${_id}`, {
+        fetch(`https://radiant-mountain-55714.herokuapp.com/users/${_id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -37,8 +37,8 @@ const Users = ({index,user}) => {
         <tr>
             <th>#</th>
             <td><p  className='text-accent'>{email}</p></td>
-            <td><button onClick={handleAdmin} class="btn btn-sm btn-secondary" disabled={role ==='admin' && 'disabled'}>Make Admin</button></td>
-            <td><button onClick={handleDeleteItem} class="btn btn-sm btn-secondary"><FontAwesomeIcon icon={faTrash}></FontAwesomeIcon></button></td>
+            <td><button onClick={handleAdmin} className="btn btn-sm btn-secondary" disabled={role ==='admin' && 'disabled'}>Make Admin</button></td>
+            <td><button onClick={handleDeleteItem} className="btn btn-sm btn-secondary"><FontAwesomeIcon icon={faTrash}></FontAwesomeIcon></button></td>
         </tr>
     );
 };

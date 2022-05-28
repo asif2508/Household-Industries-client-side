@@ -5,7 +5,7 @@ const useToken = user =>{
         const postReq = async () => {
             const email = user?.user?.email;
             if(email){
-                await fetch(`http://localhost:5000/users/${email}`, {
+                await fetch(`https://radiant-mountain-55714.herokuapp.com/users/${email}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

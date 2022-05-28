@@ -7,7 +7,7 @@ const Reviews = () => {
     const [user] = useAuthState(auth);
     const [reviews, setReviews] = useState([]);
     useEffect(()=>{
-        fetch('http://localhost:5000/reviews')
+        fetch('https://radiant-mountain-55714.herokuapp.com/reviews')
         .then(res => res.json())
         .then(data => setReviews(data))
     },[reviews, user]);
@@ -17,7 +17,7 @@ const Reviews = () => {
             <div className='grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3'>
             {
                 reviews.slice(-3).map(review => <Review
-                key={review.id}
+                key={review._id}
                 review={review}
                 ></Review>)
             }

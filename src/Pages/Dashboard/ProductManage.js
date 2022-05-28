@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const ProductManage = ({product}) => {
     const {name, _id, minimum, available, price} = product;
     const handleDeleteItem = ()=>{
-        fetch(`http://localhost:5000/products/${_id}`, {
+        fetch(`https://radiant-mountain-55714.herokuapp.com/products/${_id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -23,9 +23,9 @@ const ProductManage = ({product}) => {
             <td><p>{available}</p></td>
             <td><p>{minimum}</p></td>
             <td><p>${price}</p></td>
-            <td><Link to={`/addquantity/${_id}`} class="btn btn-secondary btn-sm">Manage</Link ></td>
+            <td><Link to={`/addquantity/${_id}`} className="btn btn-secondary btn-sm">Manage</Link ></td>
 
-            <td><button onClick={handleDeleteItem} class="btn btn-secondary btn-sm"><FontAwesomeIcon icon={faTrash}></FontAwesomeIcon></button ></td>
+            <td><button onClick={handleDeleteItem} className="btn btn-secondary btn-sm"><FontAwesomeIcon icon={faTrash}></FontAwesomeIcon></button ></td>
         </tr>
     );
 };

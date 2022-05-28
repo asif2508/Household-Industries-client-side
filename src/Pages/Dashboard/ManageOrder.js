@@ -6,7 +6,7 @@ const ManageOrder = ({order}) => {
     const {_id, product_name, product_id, quantity, newTransactionId, totalPrice, email} = order;
 
     const handleDeleteItem = ()=>{
-        fetch(`http://localhost:5000/orders/${_id}`, {
+        fetch(`https://radiant-mountain-55714.herokuapp.com/orders/${_id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -26,7 +26,7 @@ const ManageOrder = ({order}) => {
             <td><p>{email}</p></td>
             <td>{!newTransactionId ? <p>Unpaid</p> : <p>Paid</p>}</td>
 
-            <td>{newTransactionId ? <button class="btn btn-secondary btn-sm"><FontAwesomeIcon icon={ faShippingFast }></FontAwesomeIcon></button > : <button onClick={handleDeleteItem} class="btn btn-secondary btn-sm"><FontAwesomeIcon icon={faTrash}></FontAwesomeIcon></button >}</td>
+            <td>{newTransactionId ? <button className="btn btn-secondary btn-sm"><FontAwesomeIcon icon={ faShippingFast }></FontAwesomeIcon></button > : <button onClick={handleDeleteItem} className="btn btn-secondary btn-sm"><FontAwesomeIcon icon={faTrash}></FontAwesomeIcon></button >}</td>
         </tr>
     );
 };

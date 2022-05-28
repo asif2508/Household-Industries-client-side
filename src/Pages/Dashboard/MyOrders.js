@@ -10,14 +10,14 @@ const MyOrders = () => {
     const {email} = user;
     const [myorders, setMyOrders] = useState([]);
     useEffect(()=>{
-        fetch(`http://localhost:5000/myorders/${email}`)
+        fetch(`https://radiant-mountain-55714.herokuapp.com/myorders/${email}`)
         .then(res => res.json())
         .then(data => setMyOrders(data))
     },[myorders, user]);
     return (
         <div>
-            <div class="overflow-x-auto">
-                <table class="table table-zebra w-full">
+            <div className="overflow-x-auto">
+                <table className="table table-zebra w-full">
                     {/* <!-- head --> */}
                     <thead>
                         <tr>

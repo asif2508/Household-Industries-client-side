@@ -5,7 +5,7 @@ import Tool from '../HomePage/Tool/Tool';
 const AllProduct = () => {
     const [tools, setTools] = useState([]);
     useEffect(()=>{
-        fetch('http://localhost:5000/products')
+        fetch('https://radiant-mountain-55714.herokuapp.com/products')
         .then(res => res.json())
         .then(data => setTools(data))
     },[tools]);
